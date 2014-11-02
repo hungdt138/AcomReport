@@ -420,7 +420,7 @@ public class SubscriberOrderImpl {
         return lst;
     }
 
-    public static List<SubBean> getAllSubActive(long merchantId, int telcoId, String fromDate, String toDate, String sc, long productId) throws Exception {
+    public static List<SubBean> getAllSubActive(long merchantId, int telcoId, String fromDate, String toDate, String sc, long productId, int type) throws Exception {
         List<SubBean> lst = new ArrayList<SubBean>();
         Connection connection = null;
         PreparedStatement stmt = null;
@@ -428,7 +428,7 @@ public class SubscriberOrderImpl {
 
         List<Date> dates = new ArrayList<Date>();
         DateFormat formatter;
-        if (!fromDate.equalsIgnoreCase(toDate)) {
+        if (type == 1) {
             formatter = new SimpleDateFormat("MM/dd/yyyy");
             Date startDate = (Date) formatter.parse(fromDate);
             Date endDate = (Date) formatter.parse(toDate);
@@ -452,7 +452,7 @@ public class SubscriberOrderImpl {
                 sub.setUnreg(0);
                 lst.add(sub);
             }
-        } else if (fromDate.equalsIgnoreCase(toDate)) {
+        } else if (type == 2) {
             SubBean sub = null;
             for (int i = 0; i < 24; i++) {
                 sub = new SubBean();
@@ -478,7 +478,7 @@ public class SubscriberOrderImpl {
         }
         String sql = "";
         try {
-            if (!fromDate.equalsIgnoreCase(toDate)) {
+            if (type == 1) {
                 sql = "SELECT to_char(o.createDate, 'DD-MM') regday,\n"
                         + "          count(CASE WHEN o.ordertype = 'unregister' THEN 0 END) unreg,\n"
                         + "          count(CASE WHEN o.ordertype = 'register' THEN 0 END) reg,\n"
@@ -495,7 +495,7 @@ public class SubscriberOrderImpl {
                         + search
                         + "   GROUP BY TO_CHAR(o.createDate, 'DD-MM')\n"
                         + "   ORDER BY max(o.createDate) ASC";
-            } else if (fromDate.equalsIgnoreCase(toDate)) {
+            } else if (type == 2) {
                 sql = "SELECT to_char(o.createDate, 'HH24') regday,\n"
                         + "          count(CASE WHEN o.ordertype = 'unregister' THEN 0 END) unreg,\n"
                         + "          count(CASE WHEN o.ordertype = 'register' THEN 0 END) reg,\n"
@@ -525,7 +525,7 @@ public class SubscriberOrderImpl {
 
             while (rs.next()) {
                 for (SubBean s : lst) {
-                    if (fromDate.equalsIgnoreCase(toDate)) {
+                    if (type == 2) {
                         if (Integer.parseInt(s.getDateTime()) == Integer.parseInt(rs.getString("regday"))) {
                             s.setReg(rs.getInt("reg"));
                             s.setUnreg(rs.getInt("unreg"));
@@ -670,7 +670,7 @@ public class SubscriberOrderImpl {
 
         int regInMonth = SubscriberOrderImpl.countAllRegisterByTime(telcoId, merchantId, fromDate, toDate);
 
-        List<SubBean> lst = getAllSubActive(merchantId, telcoId, fromDate, toDate, "", 0);
+        List<SubBean> lst = getAllSubActive(merchantId, telcoId, fromDate, toDate, "", 0, 1);
         int total = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM");
         for (SubBean sub : lst) {

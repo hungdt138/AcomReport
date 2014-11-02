@@ -53,7 +53,7 @@ public class TelcoDataController implements Controller {
         
         if("".equals(price))
         {
-            price = "0";
+            price = "1";
         }
         
         if ("".equals(status))

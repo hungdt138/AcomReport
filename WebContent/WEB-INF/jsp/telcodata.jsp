@@ -168,6 +168,7 @@
 
 
                                 </table>
+                                <span style="font-size: 13px; font-style: italic;color: red;">- Để chọn trạng thái charge tiền cần phải chọn nhà mạng trước.</span>
                             </div>
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Tìm kiếm</button>
@@ -239,7 +240,8 @@
                                                         <c:if test="${l.chargeResult != 0}">
                                                             Không thành công
                                                         </c:if>
-                                                    </c:if></td>
+                                                    </c:if>
+                                                 </td>
                                             </tr>
                                         </c:forEach>
                                     </c:if>

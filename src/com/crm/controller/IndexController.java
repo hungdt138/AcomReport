@@ -66,7 +66,7 @@ public class IndexController implements Controller {
         StatisticBean statisticVnm = SubscriberOrderImpl.subStatistic(4, merchantId, startMonth, currentDate);
         StatisticBean statisticMobi = SubscriberOrderImpl.subStatistic(1, merchantId, startMonth, currentDate);
         //get CCU Mobifone
-        List<SubBean> lst1 = SubscriberOrderImpl.getAllSubActive(merchantId, 1, currentDate, currentDate, "", 0);
+        List<SubBean> lst1 = SubscriberOrderImpl.getAllSubActive(merchantId, 1, currentDate, currentDate, "", 0, 2);
 
         List<String> lstMobifone = new ArrayList<String>();
 
@@ -77,7 +77,7 @@ public class IndexController implements Controller {
         }
 
         //vina
-        List<SubBean> lst2 = SubscriberOrderImpl.getAllSubActive(merchantId, 2, currentDate, currentDate, "", 0);
+        List<SubBean> lst2 = SubscriberOrderImpl.getAllSubActive(merchantId, 2, currentDate, currentDate, "", 0, 2);
         List<String> lstVinaphone = new ArrayList<String>();
         for (SubBean s : lst2) {
             lstVinaphone.add(String.valueOf(s.getTotal()));
@@ -85,7 +85,7 @@ public class IndexController implements Controller {
         }
 
         //Viettel
-        List<SubBean> lst3 = SubscriberOrderImpl.getAllSubActive(merchantId, 3, currentDate, currentDate, "", 0);
+        List<SubBean> lst3 = SubscriberOrderImpl.getAllSubActive(merchantId, 3, currentDate, currentDate, "", 0, 2);
 
         List<String> lstViettel = new ArrayList<String>();
         for (SubBean s : lst3) {
@@ -93,7 +93,7 @@ public class IndexController implements Controller {
            
         }
         //Vietnamobile
-        List<SubBean> lst4 = SubscriberOrderImpl.getAllSubActive(merchantId, 4, currentDate, currentDate, "", 0);
+        List<SubBean> lst4 = SubscriberOrderImpl.getAllSubActive(merchantId, 4, currentDate, currentDate, "", 0, 2);
         List<String> lstVNM = new ArrayList<String>();
         for (SubBean s : lst4) {
             lstVNM.add(String.valueOf(s.getTotal()));

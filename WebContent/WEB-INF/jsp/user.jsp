@@ -71,10 +71,10 @@
                                                 <td><a href="updateuser.action?act=1&uid=${l.userId}">Sửa</a></td>
                                                 <td>
                                                     <c:if test="${l.status == 0}">
-                                                        <a href="user.do?action=1&uid=${l.userId}">Khóa</a>
+                                                        <a href="user.action?action=1&uid=${l.userId}">Khóa</a>
                                                     </c:if>
                                                     <c:if test="${l.status == 1}">
-                                                        <a href="user.do?action=2&uid=${l.userId}">Mở khóa</a>
+                                                        <a href="user.action?action=2&uid=${l.userId}">Mở khóa</a>
                                                     </c:if>
                                                 </td>
                                             </tr>

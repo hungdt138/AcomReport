@@ -67,7 +67,7 @@ public class TelcosImpl {
 			search += " and t.telcoId = " + telcoId;
 		}
 
-		if (price != 0) {
+		if (price != 1) {
 			search += " and t.cost = " + price;
 		}
 		if (chargeResult != 5) {
